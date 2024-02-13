@@ -1,6 +1,6 @@
 const {MongoClient} = require('mongodb')
 
-const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template'
+const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
 
 const client = new MongoClient(Db, {
     useNewUrlParser: true,
@@ -17,7 +17,7 @@ module.exports = {
             console.error(e)
         }
 
-        _db = client.db('ts-mern-template')
+        _db = client.db('ts-mern-template-db')
 
         return _db === undefined ? false : true
     },

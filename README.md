@@ -3,7 +3,9 @@
 To use this template, follow these steps:
 
 Configure Database
-* Modify references to database - find all 'ts-mern-template' and replace with the name of the database you'd like to use
+* Modify name in package.jsons - find all 'ts-mern-template' and replace with the name of the database you'd like to use
+* Modify references to database - find all 'ts-mern-template-db' and replace with the name of the database you'd like to use
+* If you want to use a local data base, update the line in server\db\conn.js to look like: const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
 * If you're keeping the boilerplate routes from record.js, update the collection name 'records' as necessary
 
 Env Variables
