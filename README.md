@@ -9,8 +9,8 @@ Configure Database
 * If you're keeping the boilerplate routes from record.js, update the collection name 'records' as necessary
 
 Env Variables
-* Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username and UrlEncodedPassword:
-ATLAS_URI=mongodb+srv://Username:UrlEncodedPassword@cluster0.ld7dh.mongodb.net/?retryWrites=true&w=majority
+* Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username and UrlEncodedPassword: \
+ATLAS_URI=mongodb+srv://Username:UrlEncodedPassword@cluster0.ld7dh.mongodb.net/?retryWrites=true&w=majority \
 PORT=3001
 
 Formatting & TS errors
