@@ -1,17 +1,17 @@
-const express = require('express')
-const cors = require('cors')
-require('dotenv').config({path: './config.env'})
+import './env.ts'
+import express from 'express'
+import cors from 'cors'
+import recordRoutes from './routes/record.ts'
+import {dbo} from './db/conn.ts'
+
 
 const app = express()
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT
 
 app.use(cors())
 app.use(express.json())
-app.use(require('./routes/record'))
-
-// get driver connection
-const dbo = require('./db/conn')
+app.use(recordRoutes)
 
 app.listen(port, () => {
     // perform a database connection when server starts

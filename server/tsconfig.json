@@ -15,9 +15,9 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "allowImportingTsExtensions": true
     },
-    "include": ["/src", "tsconfig.json"],
     "ts-node": {
         "esm": true,
         "compiler": "typescript"

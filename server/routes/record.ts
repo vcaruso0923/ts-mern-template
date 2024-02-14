@@ -1,26 +1,26 @@
-const express = require('express')
-const dbo = require('../db/conn')
-const ObjectId = require('mongodb').ObjectId
+import express, { Router } from 'express'
+import {dbo} from '../db/conn.ts'
+import {ObjectId} from 'mongodb'
 
-const recordRoutes = express.Router()
+const recordRoutes: Router = express.Router()
 
 // This section will help you get a list of all the records.
 recordRoutes.route('/record').get(function (req, res) {
-    let db_connect = dbo.getDb('ts-mern-template-db')
+    let db_connect = dbo.getDb()
     db_connect
         .collection('records')
         .find({})
         .toArray()
         .then(data => {
             console.log(data)
-            response.json(data)
+            res.json(data)
         })
 })
 
 // This section will help you get a single record by id
 recordRoutes.route('/record/:id').get(function (req, res) {
     let db_connect = dbo.getDb()
-    let myquery = {_id: ObjectId(req.params.id)}
+    let myquery = {_id: new ObjectId(req.params.id)}
     db_connect.collection('records').findOne(myquery, function (err, result) {
         if (err) throw err
         res.json(result)
@@ -44,7 +44,7 @@ recordRoutes.route('/record/add').post(function (req, response) {
 // This section will help you update a record by id.
 recordRoutes.route('/update/:id').post(function (req, response) {
     let db_connect = dbo.getDb()
-    let myquery = {_id: ObjectId(req.params.id)}
+    let myquery = {_id: new ObjectId(req.params.id)}
     let newvalues = {
         $set: {
             name: req.body.name,
@@ -62,7 +62,7 @@ recordRoutes.route('/update/:id').post(function (req, response) {
 // This section will help you delete a record
 recordRoutes.route('/:id').delete((req, response) => {
     let db_connect = dbo.getDb()
-    let myquery = {_id: ObjectId(req.params.id)}
+    let myquery = {_id: new ObjectId(req.params.id)}
     db_connect.collection('records').deleteOne(myquery, function (err, obj) {
         if (err) throw err
         console.log('1 document deleted')
@@ -70,4 +70,4 @@ recordRoutes.route('/:id').delete((req, response) => {
     })
 })
 
-module.exports = recordRoutes
+export default recordRoutes

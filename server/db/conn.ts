@@ -1,15 +1,12 @@
-const {MongoClient} = require('mongodb')
+import {MongoClient} from 'mongodb'
 
-const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
+const Db = process.env.ATLAS_URI
 
-const client = new MongoClient(Db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+const client = new MongoClient(Db || '')
 
-var _db
+let _db
 
-module.exports = {
+export const dbo = {
     connectToServer: async function (callback) {
         try {
             await client.connect()
