@@ -1,69 +1,76 @@
-import express, { Router } from 'express'
-import {dbo} from '../db/conn.ts'
+import express, {Router} from 'express'
+import db from '../db/conn.ts'
 import {ObjectId} from 'mongodb'
 
 const recordRoutes: Router = express.Router()
 
-// This section will help you get a list of all the records.
-recordRoutes.route('/record').get(function (req, res) {
-    let db_connect = dbo.getDb()
-    db_connect
-        .collection('records')
-        .find({})
+// Get a list of 50 records
+recordRoutes.get('/po', async (req, res) => {
+    let collection = await db.collection('records')
+    let results = await collection.find({}).limit(50).toArray()
+
+    res.send(results).status(200)
+})
+
+// Fetches the latest records
+recordRoutes.get('/latest', async (req, res) => {
+    let collection = await db.collection('records')
+    let results = await collection
+        .aggregate([
+            {'$project': {'author': 1, 'title': 1, 'tags': 1, 'date': 1}},
+            {'$sort': {'date': -1}},
+            {'$limit': 3}
+        ])
         .toArray()
-        .then(data => {
-            console.log(data)
-            res.json(data)
-        })
+    res.send(results).status(200)
 })
 
-// This section will help you get a single record by id
-recordRoutes.route('/record/:id').get(function (req, res) {
-    let db_connect = dbo.getDb()
-    let myquery = {_id: new ObjectId(req.params.id)}
-    db_connect.collection('records').findOne(myquery, function (err, result) {
-        if (err) throw err
-        res.json(result)
-    })
+// Get a single post
+recordRoutes.get('/:id', async (req, res) => {
+    let collection = await db.collection('records')
+    let query = {_id: new ObjectId(req.params.id)}
+    let result = await collection.findOne(query)
+
+    if (!result) res.send('Not found').status(404)
+    else res.send(result).status(200)
 })
 
-// This section will help you create a new record.
-recordRoutes.route('/record/add').post(function (req, response) {
-    let db_connect = dbo.getDb()
-    let myobj = {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level
+// Add a new document to the collection
+recordRoutes.post('/record/add', async (req, res) => {
+    let collection = await db.collection('records')
+    let newDocument = req.body
+    newDocument.date = new Date()
+    let result = await collection.insertOne(newDocument)
+    res.send(result).status(204)
+})
+
+// Update the post with a new comment
+recordRoutes.patch('/comment/:id', async (req, res) => {
+    const query = {_id: new ObjectId(req.params.id)}
+    const updates = {
+        $push: {comments: req.body}
     }
-    db_connect.collection('records').insertOne(myobj, function (err, res) {
-        if (err) throw err
-        response.json(res)
-    })
+
+    let collection = await db.collection('records')
+    let result = await collection.updateOne(query, updates)
+
+    res.send(result).status(200)
 })
 
-// This section will help you update a record by id.
-recordRoutes.route('/update/:id').post(function (req, response) {
-    let db_connect = dbo.getDb()
-    let myquery = {_id: new ObjectId(req.params.id)}
-    let newvalues = {
-        $set: {
-            name: req.body.name,
-            position: req.body.position,
-            level: req.body.level
-        }
-    }
-    db_connect.collection('records').updateOne(myquery, newvalues, function (err, res) {
-        if (err) throw err
-        console.log('1 document updated')
-        response.json(res)
-    })
+// Delete an entry
+recordRoutes.delete('/:id', async (req, res) => {
+    const query = {_id: new ObjectId(req.params.id)}
+
+    const collection = db.collection('records')
+    let result = await collection.deleteOne(query)
+
+    res.send(result).status(200)
 })
 
 // This section will help you delete a record
 recordRoutes.route('/:id').delete((req, response) => {
-    let db_connect = dbo.getDb()
     let myquery = {_id: new ObjectId(req.params.id)}
-    db_connect.collection('records').deleteOne(myquery, function (err, obj) {
+    db.collection('records').deleteOne(myquery, function (err, obj) {
         if (err) throw err
         console.log('1 document deleted')
         response.json(obj)

@@ -1,24 +1,19 @@
 import {MongoClient} from 'mongodb'
 
-const Db = process.env.ATLAS_URI
+const connectionString = process.env.ATLAS_URI || ''
 
-const client = new MongoClient(Db || '')
+const client = new MongoClient(connectionString)
 
 let _db
 
-export const dbo = {
-    connectToServer: async function (callback) {
-        try {
-            await client.connect()
-        } catch (e) {
-            console.error(e)
-        }
+let conn
 
-        _db = client.db('ts-mern-template-db')
-
-        return _db === undefined ? false : true
-    },
-    getDb: function () {
-        return _db
-    }
+try {
+    conn = await client.connect()
+} catch (e) {
+    console.error(e)
 }
+
+let db = conn.db('ts-mern-template-db')
+
+export default db
