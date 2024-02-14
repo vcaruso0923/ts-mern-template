@@ -2,7 +2,7 @@
     "name": "ts-mern-template",
     "version": "1.0.0",
     "description": "",
-    "main": "server/server.js",
+    "main": "server/server.ts",
     "scripts": {
         "start": "cd server && npm start",
         "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
@@ -13,10 +13,18 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "if-env": "^1.0.4"
+        "if-env": "^1.0.4",
+        "path": "^0.12.7"
     },
     "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/mongodb": "^4.0.7",
+        "@types/node": "^20.11.17",
+        "@types/jest": "^27.5.2",
+        "@types/react": "^18.2.28",
+        "@types/react-dom": "^18.2.13",
         "concurrently": "^5.1.0",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "ts-node": "^10.9.2"
     }
 }
