@@ -12,7 +12,6 @@ node_modules
 /build
 
 # env variables
-/config.env
 
 # misc
 .DS_Store
