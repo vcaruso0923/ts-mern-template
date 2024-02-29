@@ -24,10 +24,9 @@
         "@types/react": "^18.2.28",
         "@types/react-dom": "^18.2.13",
         "concurrently": "^5.1.0",
-        "prettier": "^2.7.1",
-        "ts-node": "^10.9.2"
+        "prettier": "^2.7.1"
     },
     "engines": {
-      "node": "16.16.0"
+      "node": "20.11.1"
     }
 }
