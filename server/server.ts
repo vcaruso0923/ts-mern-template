@@ -1,6 +1,7 @@
 import './env.ts'
 import express from 'express'
 import cors from 'cors'
+import path from "path";
 import recordRoutes from './routes/record.ts'
 
 const app = express()
