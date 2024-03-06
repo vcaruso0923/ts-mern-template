@@ -1,10 +1,11 @@
 import {ObjectId} from 'mongodb'
-import { Request } from 'express'
+import {Request} from 'express'
 
 export interface RecordRequestInterface extends Partial<Request> {
+    date: Date
     name?: string
     position?: string
-    level?:string
+    level?: string
 }
 
 export interface RecordInterface {
@@ -12,5 +13,5 @@ export interface RecordInterface {
     date: Date
     name: string
     position: string
-    level:string
+    level: string
 }
