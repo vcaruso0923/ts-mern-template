@@ -8,10 +8,6 @@ export interface RecordRequestInterface extends Partial<Request> {
     level?: string
 }
 
-export interface RecordInterface {
+export interface RecordInterface extends RecordRequestInterface {
     _Id: ObjectId
-    date: Date
-    name: string
-    position: string
-    level: string
 }

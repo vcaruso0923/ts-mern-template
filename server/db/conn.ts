@@ -4,8 +4,6 @@ const connectionString = process.env.ATLAS_URI || ''
 
 const client = new MongoClient(connectionString)
 
-let _db
-
 let conn
 
 try {
