@@ -3,20 +3,25 @@
 To use this template, follow these steps:
 
 Configure Database
-* Modify name in package.jsons - find all 'ts-mern-template' and replace with the name of the database you'd like to use
-* Modify references to database - find all 'ts-mern-template-db' and replace with the name of the database you'd like to use
-* If you want to use a local data base, update the line in server\db\conn.js to look like: const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
-* If you're keeping the boilerplate routes from record.js, update the collection name 'records' as necessary
+
+-   Modify name in package.jsons - find all 'ts-mern-template' and replace with the name of the database you'd like to use
+-   Modify references to database - find all 'ts-mern-template-db' and replace with the name of the database you'd like to use
+-   If you want to use a local data base, update the line in server\db\conn.js to look like: const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
+-   If you're keeping the boilerplate routes from record.js, update the collection name 'records' as necessary
 
 Env Variables
-* Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username and UrlEncodedPassword: \
-ATLAS_URI=mongodb+srv://Username:UrlEncodedPassword@cluster0.ld7dh.mongodb.net/?retryWrites=true&w=majority \
-PORT=3001
+
+Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username, UrlEncodedPassword, and DatabaseName: \
+
+    ATLAS_URI=mongodb+srv://Username:UrlEncodedPassword@cluster0.ld7dh.mongodb.net/?retryWrites=true&w=majority \
+    ATLAS_DATABASE_NAME=DatabaseName \
+    PORT=3001
 
 Formatting & TS errors
-* Make sure you have the Prettier extension installed if you'd like to use it.
-* Modify .prettierrc and .prettierignore as necessary
-* Modify client/tsconfig.json as needed
+
+-   Make sure you have the Prettier extension installed if you'd like to use it.
+-   Modify .prettierrc and .prettierignore as necessary
+-   Modify client/tsconfig.json as needed
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
