@@ -2,14 +2,14 @@
 
 To use this template, follow these steps:
 
-Configure Database
+## Configure Database
 
 -   Modify name in package.jsons - find all 'ts-mern-template' and replace with the name of the database you'd like to use
 -   Modify references to database - find all 'ts-mern-template-db' and replace with the name of the database you'd like to use
 -   If you want to use a local data base, update the line in server\db\conn.js to look like: const Db = process.env.ATLAS_URI || 'mongodb://localhost/ts-mern-template-db'
 -   If you're keeping the boilerplate routes from record.js, update the collection name 'records' as necessary
 
-Env Variables
+## Env Variables
 
 Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username, UrlEncodedPassword, and DatabaseName: \
 
@@ -17,13 +17,20 @@ Create a new file 'config.env' in /server directory. Add the following lines, ma
     ATLAS_DATABASE_NAME=DatabaseName \
     PORT=3001
 
-Formatting & TS errors
+## Formatting & TS errors
 
 -   Make sure you have the Prettier extension installed if you'd like to use it.
 -   Modify .prettierrc and .prettierignore as necessary
 -   Modify client/tsconfig.json as needed
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Deploying your application
+
+## Deploying to Heroku
+
+-   This template was build to be deployed in one piece to Heroku - the frontend will be served by the express server (see server.ts).
+- Heroku provides documentation on how to deploy Node.js servers here: https://devcenter.heroku.com/articles/deploying-nodejs. 
+
+# General Information
 
 ## Available Scripts
 
