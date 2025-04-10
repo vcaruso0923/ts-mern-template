@@ -1,7 +1,7 @@
 import express, {Request, Router} from 'express'
 import db from '../db/conn.ts'
 import {ObjectId} from 'mongodb'
-import {RecordRequestInterface} from '../types.ts'
+import {RecordPayloadInterface} from '../types.ts'
 
 const recordRoutes: Router = express.Router()
 
@@ -37,10 +37,9 @@ recordRoutes.get('/:id', async (req, res) => {
 })
 
 // Add a new document to the collection
-recordRoutes.post('/record/add', async (req: Request<{}, {}, RecordRequestInterface>, res) => {
+recordRoutes.post('/record/add', async (req: Request<{}, {}, RecordPayloadInterface>, res) => {
     let collection = await db.collection('records')
-    let newDocument = req.body
-    newDocument.date = new Date()
+    let newDocument = {...req.body, date: new Date()}
     let result = await collection.insertOne(newDocument)
     res.send(result).status(204)
 })

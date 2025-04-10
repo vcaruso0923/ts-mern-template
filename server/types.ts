@@ -1,13 +1,13 @@
 import {ObjectId} from 'mongodb'
 import {Request} from 'express'
 
-export interface RecordRequestInterface extends Partial<Request> {
-    date: Date
+export interface RecordPayloadInterface extends Partial<Request> {
     name?: string
     position?: string
     level?: string
 }
 
-export interface RecordInterface extends RecordRequestInterface {
-    _Id: ObjectId
+export interface RecordResponseInterface extends RecordPayloadInterface {
+    _id: ObjectId
+    date: Date
 }

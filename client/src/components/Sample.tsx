@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {RecordRequestInterface} from '../../../server/types'
+import {RecordPayloadInterface} from '../../../server/types'
+import { API_URL } from '../common/constants'
 
 export const Sample = () => {
-    const [form, setForm] = useState<RecordRequestInterface>({
+    const [form, setForm] = useState<RecordPayloadInterface>({
         name: '',
         position: '',
         level: ''
@@ -16,8 +17,8 @@ export const Sample = () => {
 
     const onAddPerson = async e => {
         e.preventDefault()
-        const newPerson: RecordRequestInterface = {...form}
-        await fetch('http://localhost:3001/record/add', {
+        const newPerson: RecordPayloadInterface = {...form}
+        await fetch(`${API_URL}/record/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
