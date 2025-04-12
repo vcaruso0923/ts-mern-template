@@ -11,6 +11,11 @@ To use this template, follow these steps:
 
 ## Env Variables
 
+Create a new file '.env' in /client directory. Add the following lines. Ther are needed for react-script's chokidar from watching locked files on the C:/ drive
+
+CHOKIDAR_USEPOLLING=true
+WATCHPACK_POLLING=true
+
 Create a new file 'config.env' in /server directory. Add the following lines, making sure to replace Username, UrlEncodedPassword, and DatabaseName: \
 
     ATLAS_URI=mongodb+srv://Username:UrlEncodedPassword@cluster0.ld7dh.mongodb.net/?retryWrites=true&w=majority \
@@ -28,7 +33,7 @@ Create a new file 'config.env' in /server directory. Add the following lines, ma
 ## Deploying to Heroku
 
 -   This template was build to be deployed in one piece to Heroku - the frontend will be served by the express server (see server.ts).
-- Heroku provides documentation on how to deploy Node.js servers here: https://devcenter.heroku.com/articles/deploying-nodejs. 
+-   Heroku provides documentation on how to deploy Node.js servers here: https://devcenter.heroku.com/articles/deploying-nodejs.
 
 # General Information
 
